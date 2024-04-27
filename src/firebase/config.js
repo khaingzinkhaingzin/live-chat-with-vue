@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, serverTimestamp } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword, updateProfile   } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA7EUbwqPMG0YZQGHiZKFQUV3VWXdxIq8s",
@@ -20,4 +20,4 @@ const db = getFirestore(app);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-export { db, serverTimestamp, auth, createUserWithEmailAndPassword, updateProfile  }
+export { db, serverTimestamp, auth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword }
