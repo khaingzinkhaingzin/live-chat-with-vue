@@ -17,11 +17,10 @@ let createAccount = async (email, password, displayName) => {
         });
 
         return res;
-        
+
     } catch (err) {
         // firebase error handling
         error.value = err.message;
-        console.log(error.value);
     }
 }
 
