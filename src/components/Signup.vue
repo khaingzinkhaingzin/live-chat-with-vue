@@ -16,7 +16,7 @@ import { ref } from 'vue';
 import useSignup from "../composable/useSignup"
 
 export default {
-    setup() {
+    setup(props, context) {
         let displayName = ref("");
         let email = ref("");
         let password = ref("");
@@ -27,7 +27,7 @@ export default {
             let res = await createAccount(email.value, password.value, displayName.value);
             
             if (res) {
-                console.log(res.user);
+               context.emit("enterChatroom");
             }
         }
 
