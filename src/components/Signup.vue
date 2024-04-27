@@ -10,7 +10,7 @@
 
 <script>
 import { ref } from 'vue';
-import { auth, createUserWithEmailAndPassword, updateProfile } from "../firebase/config";
+import useSignup from "../composable/useSignup"
 
 export default {
     setup() {
@@ -18,28 +18,12 @@ export default {
         let email = ref("");
         let password = ref("");
 
-        let error = ref();
+        let { error, createAccount } = useSignup();
 
         let signUp = async () => {
-            try {
-                let res = await createUserWithEmailAndPassword(auth, email.value, password.value);
-
-                // server fail or dev fail
-                if (!res) {
-                    throw new Error("could not create new user");
-                }
-
-                await updateProfile(auth.currentUser, {
-                displayName: displayName.value
-                });
-
-                console.log(res.user);
-                console.log(auth.currentUser);
-            } catch (err) {
-                // firebase error handling
-                error.value = err.message;
-                console.log(error.value);
-            }
+            let res = await createAccount(email.value, password.value, displayName.value);
+            
+            console.log(res.user);
         }
 
         return { displayName, email, password, signUp };
