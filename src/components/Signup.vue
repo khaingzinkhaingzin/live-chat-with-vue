@@ -10,7 +10,7 @@
 
 <script>
 import { ref } from 'vue';
-import { auth, createUserWithEmailAndPassword } from "../firebase/config";
+import { auth, createUserWithEmailAndPassword, updateProfile } from "../firebase/config";
 
 export default {
     setup() {
@@ -28,6 +28,13 @@ export default {
                 if (!res) {
                     throw new Error("could not create new user");
                 }
+
+                await updateProfile(auth.currentUser, {
+                displayName: displayName.value
+                });
+
+                console.log(res.user);
+                console.log(auth.currentUser);
             } catch (err) {
                 // firebase error handling
                 error.value = err.message;
