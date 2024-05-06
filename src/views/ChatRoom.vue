@@ -6,8 +6,22 @@
 
 <script>
 import Navbar from "../components/Navbar";
+import getUser from "../composable/getUser"
+import { useRouter } from 'vue-router'
+import { watch } from 'vue'
 export default {
 	components: { Navbar },
+	setup() {
+		let { user } = getUser();
+		let router = useRouter();
+
+		watch(user, () => {
+			if (!user.value) {
+				// redirect welcome 
+				router.push("/");
+			}
+		})
+	}
 };
 </script>
 
